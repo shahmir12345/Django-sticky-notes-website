@@ -1,0 +1,32 @@
+<!-- 
+    NOTE FORM TEMPLATE (Shared for Create and Edit)
+    This template is used for both creating new notes and editing existing notes.
+    It extends base.html and displays a form for note input. hum ne yahan Extends block ka use kia hai jo layout represent karta hai
+    The same template works for both operations - the view.py determines the context.
+-->
+
+{% extends 'base.html' %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+ <!-- 
+        NOTE FORM
+        - POST method: Sends form data to the server
+        - Button text changes based on action: "Create Note" or "Update Note"
+        - Cancel button returns to note list without saving
+    -->
+
+
+{% block content %}
+<div class="card">
+    <h1>{{ page_title }}</h1>
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit" class="btn">{{ button_text }}</button>
+        <a href="{% url 'note_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

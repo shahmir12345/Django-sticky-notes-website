@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Note{% endblock %}
+
+<!-- This template shows a confirmation page before deleting a note.
+    It extends the base.html template and asks user to confirm deletion. -->
+
+{% block content %}
+<div class="card">
+    <h1>Delete Note</h1>
+    <p>Are you sure you want to delete <strong>{{ note.title }}</strong>?</p>
+
+    <!-- - POST method sends the delete request to the server -->
+    <!-- - When user clicks "Yes, Delete", the form submits and view deletes the note -->
+    <!-- - "Cancel" button redirects back to note list without deleting -->
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Yes, Delete</button>
+        <a href="{% url 'note_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+<!-- 
+    USER REGISTRATION TEMPLATE
+    This template allows new users to create an account. yahan user Registeration kar sakta hai
+    Uses Django's built-in UserCreationForm which handles:
+    - Username validation
+    - Password requirements
+    - Password confirmation
+    strong password bhi recomment kare ga (Django Built in Function)
+-->
+
+{% extends 'base.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h1>Create Account</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn">Register</button>
+    </form>
+    <p>Already have an account? <a href="{% url 'login' %}">Login here</a>.</p>
+</div>
+{% endblock %}

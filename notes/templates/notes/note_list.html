@@ -1,0 +1,41 @@
+<!-- 
+    NOTE LIST TEMPLATE (Dashboard/Home Page)
+    This template displays all notes belonging to the logged-in user. jo bhi login user hoga uske liye yeh sarri Functionality hai
+    Each note appears as a sticky note card with its custom background color. hum khud se design kar saktay hain colour
+    Shows timestamps and provides edit/delete options for each note.
+-->
+
+{% extends 'base.html' %}
+
+{% block title %}My Notes{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h1>My Sticky Notes</h1>
+    <p class="muted">Only your own notes are shown here.</p>
+    <a class="btn" href="{% url 'note_create' %}">+ Create New Note</a>
+</div>
+
+<div class="notes-grid">
+    {% for note in notes %}
+        <div class="note-card" style="background-color: {{ note.color }};">
+            <div>
+                <h3>{{ note.title }}</h3>
+                <p>{{ note.content|linebreaksbr }}</p>
+            </div>
+            <div>
+                <p class="muted">Created: {{ note.created_at|date:'M d, Y H:i' }}</p>
+                <p class="muted">Updated: {{ note.updated_at|date:'M d, Y H:i' }}</p>
+                <div class="note-actions">
+                    <a href="{% url 'note_edit' note.pk %}">Edit</a>
+                    <a href="{% url 'note_delete' note.pk %}">Delete</a>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <div class="card">
+            <p>You do not have any notes yet. Click <strong>Create New Note</strong> to add your first sticky note.</p>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

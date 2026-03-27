@@ -1,0 +1,15 @@
+{% extends 'base.html' %} #yeh layout ko call karnay ke liye isi ki madad se hammay baar baar HTML file bananay ki zarorat nhi parti is file ko base.html se change kar de ga 
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h1>Login</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn">Login</button>
+    </form>
+    <p>Need an account? <a href="{% url 'register' %}">Register here</a>.</p>
+</div>
+{% endblock %}
